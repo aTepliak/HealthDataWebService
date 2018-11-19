@@ -27,7 +27,7 @@ public class CollectionController {
     private AtomicService atomicService;
     private ComplexService complexService;
 
-    @Autowiredu
+    @Autowired
     public void setAtomicAndComplexServices(AtomicService atomicService, ComplexService complexService) {
         this.atomicService = atomicService;
         this.complexService = complexService;
