@@ -1,8 +1,6 @@
 package com.gatheringhealthdata.healthdatagathering.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.util.*;
@@ -25,11 +23,14 @@ public class HealthDataComplex {
     private Date endTime;
 
     @ManyToMany
-    @JoinTable(name = "atomic_complex", joinColumns = {@JoinColumn(name = "complexId",  nullable = true, updatable = true)},
-            inverseJoinColumns = {@JoinColumn(name = "atomicId",  nullable = true)})
+    @JoinTable(name = "atomic_complex", joinColumns = {@JoinColumn(name = "complexId", nullable = true, updatable = true)},
+            inverseJoinColumns = {@JoinColumn(name = "atomicId", nullable = true)})
     @JsonBackReference
     private List<HealthDataAtomic> atomicValues = new ArrayList<>();
-
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<HealthDataComplex> complexElementsInside = new HashSet<HealthDataComplex>();
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "complexElementsInside")
+    private Set<HealthDataComplex> complexElementOf = new HashSet<HealthDataComplex>();
 
     public HealthDataComplex() {
     }
@@ -39,12 +40,6 @@ public class HealthDataComplex {
         this.startTime = startTime;
         this.endTime = endTime;
     }
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<HealthDataComplex> complexElementsInside = new HashSet<HealthDataComplex>();
-
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "complexElementsInside")
-    private Set<HealthDataComplex> complexElementOf = new HashSet<HealthDataComplex>();
 
     public long getId() {
         return id;

@@ -1,8 +1,8 @@
 package com.gatheringhealthdata.healthdatagathering.services;
 
 import com.gatheringhealthdata.healthdatagathering.entities.HealthDataAtomic;
-import org.springframework.beans.factory.annotation.Autowired;
 import com.gatheringhealthdata.healthdatagathering.repositories.HealthDataAtomicRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -34,8 +34,8 @@ public class AtomicServiceImpl implements AtomicService {
     }
 
     @Override
-    public HealthDataAtomic  getById(Long id) {
-        return  atomicRepository.findById(id).orElse(null);
+    public HealthDataAtomic getById(Long id) {
+        return atomicRepository.findById(id).orElse(null);
     }
 
     @Override

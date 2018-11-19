@@ -23,11 +23,11 @@ import java.util.List;
 @RequestMapping("collect")
 public class CollectionController {
 
+    Calendar calendar = Calendar.getInstance();
     private AtomicService atomicService;
     private ComplexService complexService;
-    Calendar calendar = Calendar.getInstance();
 
-    @Autowired
+    @Autowiredu
     public void setAtomicAndComplexServices(AtomicService atomicService, ComplexService complexService) {
         this.atomicService = atomicService;
         this.complexService = complexService;
@@ -39,17 +39,17 @@ public class CollectionController {
         String json = gson.toJson(complexData);
         System.out.println("Input" + json);
         complexData.forEach(complex -> {
-            complex.getAtomicValues().forEach(atomic ->{
-                HealthDataAtomic pAtomic= atomicService.saveOrUpdate(atomic, atomic.getId());
+            complex.getAtomicValues().forEach(atomic -> {
+                HealthDataAtomic pAtomic = atomicService.saveOrUpdate(atomic, atomic.getId());
                 System.out.println("names:" + pAtomic.getName());
-                 complex.getAtomicValues().add(pAtomic);
+                complex.getAtomicValues().add(pAtomic);
 
             });
 
             complexService.saveOrUpdate(complex, complex.getId());
         });
         List<HealthDataComplex> allComplex = complexService.listAll();
-        String atomicsAsJson= new Gson().toJson(allComplex);
+        String atomicsAsJson = new Gson().toJson(allComplex);
         System.out.println(atomicsAsJson);
         ResponseEntity responseEntity = new ResponseEntity(HttpStatus.OK);
         return responseEntity;

@@ -19,9 +19,9 @@ import java.util.stream.Collectors;
 @RequestMapping("data")
 public class VisualizationController {
 
+    Calendar calendar = Calendar.getInstance();
     private AtomicService atomicService;
     private ComplexService complexService;
-    Calendar calendar = Calendar.getInstance();
 
     @Autowired
     public void setAtomicAndComplexServices(AtomicService atomicService, ComplexService complexService) {
@@ -37,22 +37,22 @@ public class VisualizationController {
             String date = dateFormat.format(data.getStartTime());
             return date;
         }).collect(Collectors.toList());
-        List<Integer> sleepMinutes = atomicService.findByName("sleepTime").stream().map(data->{
-            Date date= new Date(1546297200000L);
-            if (data.getStartTime().getTime()!= 0L && data.getStartTime().compareTo(date)<0) {
+        List<Integer> sleepMinutes = atomicService.findByName("sleepTime").stream().map(data -> {
+            Date date = new Date(1546297200000L);
+            if (data.getStartTime().getTime() != 0L && data.getStartTime().compareTo(date) < 0) {
                 long diff = data.getEndTime().getTime() - data.getStartTime().getTime();
                 long diffMinutes = TimeUnit.MILLISECONDS.toMinutes(diff);
                 return (int) diffMinutes;
             }
             return 0;
-        }).filter(time->time!=0).collect(Collectors.toList());
+        }).filter(time -> time != 0).collect(Collectors.toList());
 
         Map<String, List<Integer>> sleepMinutesMap = new HashMap<>();
         sleepMinutesMap.put("sleep", sleepMinutes);
         String sleepMinutesAsJSON = new Gson().toJson(sleepMinutesMap);
-        Map<String, List<Float>> stepsAndFloors = getDataSeries(new String[]{"steps","floorsClimbed"});
-        Map<String, List<Float>> caffeineIntakeAndBloodGlucose = getDataSeries(new String[]{"caffeineIntake","bloodGlucose"});
-        Map<String, List<Float>> caffeineIntakeAndHeartRate = getDataSeries(new String[]{"caffeineIntake","heartRate"});
+        Map<String, List<Float>> stepsAndFloors = getDataSeries(new String[]{"steps", "floorsClimbed"});
+        Map<String, List<Float>> caffeineIntakeAndBloodGlucose = getDataSeries(new String[]{"caffeineIntake", "bloodGlucose"});
+        Map<String, List<Float>> caffeineIntakeAndHeartRate = getDataSeries(new String[]{"caffeineIntake", "heartRate"});
         System.out.println(Arrays.toString(dates.toArray()));
         String datesAsJSON = new Gson().toJson(dates);
         String stepsAndFloorsAsJSON = new Gson().toJson(stepsAndFloors);
@@ -72,14 +72,14 @@ public class VisualizationController {
         return "user";
     }
 
-    public  Map<String, List<Float>> getDataSeries(String[] names){
+    public Map<String, List<Float>> getDataSeries(String[] names) {
         Map<String, List<Float>> series = new HashMap<>();
-        for(String name: names){
+        for (String name : names) {
             List<HealthDataAtomic> dataFromDb = atomicService.findByName(name);
             List<Float> seriesArray = dataFromDb.stream().map(data -> data.getFloatValue()).collect(Collectors.toList());
-            series.put(name,seriesArray);
+            series.put(name, seriesArray);
         }
-        return  series;
+        return series;
     }
 
 }

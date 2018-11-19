@@ -3,7 +3,9 @@ package com.gatheringhealthdata.healthdatagathering.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "atomic",
@@ -27,7 +29,7 @@ public class HealthDataAtomic {
     private float floatValue;
 
 
-    @ManyToMany(  mappedBy = "atomicValues", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "atomicValues", cascade = CascadeType.ALL)
     @JsonBackReference
     private List<HealthDataComplex> complexElements = new ArrayList<>();
 

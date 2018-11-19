@@ -3,13 +3,13 @@ package com.gatheringhealthdata.healthdatagathering.services;
 import com.gatheringhealthdata.healthdatagathering.entities.HealthDataAtomic;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 @Service
 public interface AtomicService {
 
     List<HealthDataAtomic> listAll();
+
     List<HealthDataAtomic> findByName(String name);
 
     HealthDataAtomic getById(Long id);

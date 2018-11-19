@@ -1,4 +1,4 @@
-function createStackColumnChart(container, titleX, titleY, categoriesArray, series ) {
+function createStackColumnChart(container, titleX, titleY, categoriesArray, series) {
     Highcharts.chart(container, { // 'containerBloodSugar'
         chart: {
             type: 'column'
@@ -12,7 +12,7 @@ function createStackColumnChart(container, titleX, titleY, categoriesArray, seri
         yAxis: {
             min: 0,
             title: {
-                text:  titleY //'Total fruit consumption'
+                text: titleY //'Total fruit consumption'
             },
             stackLabels: {
                 enabled: true,
@@ -63,7 +63,7 @@ function createStackColumnChart(container, titleX, titleY, categoriesArray, seri
 
 // ----------------------------------------------------spline chart----------------------------------------------------
 
-function createSplineChart(container, title,  titleX, titleY1, titleY2, titleY3,  categoriesArray, unitY1,unitY2, unitY3, seriesData1, seriesData2, seriesData3) {
+function createSplineChart(container, title, titleX, titleY1, titleY2, titleY3, categoriesArray, unitY1, unitY2, unitY3, seriesData1, seriesData2, seriesData3) {
     Highcharts.chart('containerComplexData', {
         chart: {
             zoomType: 'xy'
@@ -87,7 +87,7 @@ function createSplineChart(container, title,  titleX, titleY1, titleY2, titleY3,
                 }
             },
             title: {
-                text:  titleY1 , //'Temperature',
+                text: titleY1, //'Temperature',
                 style: {
                     color: Highcharts.getOptions().colors[2]
                 }
@@ -112,7 +112,7 @@ function createSplineChart(container, title,  titleX, titleY1, titleY2, titleY3,
         }, { // Tertiary yAxis
             gridLineWidth: 0,
             title: {
-                text:  titleY3, //'Sea-Level Pressure',
+                text: titleY3, //'Sea-Level Pressure',
                 style: {
                     color: Highcharts.getOptions().colors[1]
                 }
@@ -141,9 +141,9 @@ function createSplineChart(container, title,  titleX, titleY1, titleY2, titleY3,
             name: titleY1, //'Rainfall',
             type: 'column',
             yAxis: 1,
-            data:  seriesData1, //[49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
+            data: seriesData1, //[49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4],
             tooltip: {
-                valueSuffix: " " +unitY1//' mm'
+                valueSuffix: " " + unitY1//' mm'
             }
 
         }, {
@@ -156,13 +156,13 @@ function createSplineChart(container, title,  titleX, titleY1, titleY2, titleY3,
             },
             dashStyle: 'shortdot',
             tooltip: {
-                valueSuffix:" "+ unitY2// ' mb'
+                valueSuffix: " " + unitY2// ' mb'
             }
 
         }, {
-            name: titleY3 , // 'Temperature',
+            name: titleY3, // 'Temperature',
             type: 'spline',
-            data:seriesData3,// [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
+            data: seriesData3,// [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6],
             tooltip: {
                 valueSuffix: " " + unitY3// ' °C'
             }
@@ -172,15 +172,12 @@ function createSplineChart(container, title,  titleX, titleY1, titleY2, titleY3,
 }
 
 
-
-
 /*
 The purpose of this demo is to demonstrate how multiple charts on the same page
 can be linked through DOM and Highcharts events and API methods. It takes a
 standard Highcharts config with a small variation for each data set, and a
 mouse/touch event handler to bind the charts together.
 */
-
 
 
 /**
@@ -244,7 +241,7 @@ function syncExtremes(e) {
                         e.max,
                         undefined,
                         false,
-                        { trigger: 'syncExtremes' }
+                        {trigger: 'syncExtremes'}
                     );
                 }
             }
@@ -253,9 +250,8 @@ function syncExtremes(e) {
 }
 
 
-
 // ------------------------------------------------LINECHART------------------------------------------------------------
-function createLineChart(container, titleX ,titleY,  categories, seriries) {
+function createLineChart(container, titleX, titleY, categories, seriries) {
     var chart = Highcharts.chart(container, {
         chart: {
             type: 'line'
@@ -263,9 +259,9 @@ function createLineChart(container, titleX ,titleY,  categories, seriries) {
         title: {
             text: titleX //'Stacked column chart'
         },
-        yAxis:{
+        yAxis: {
             title: {
-                text:  titleY //'Total fruit consumption'
+                text: titleY //'Total fruit consumption'
             },
         },
         xAxis: {
@@ -276,7 +272,7 @@ function createLineChart(container, titleX ,titleY,  categories, seriries) {
                 allowPointSelect: true
             }
         },
-        series:seriries
+        series: seriries
     });
 }
 
@@ -284,23 +280,23 @@ function createLineChart(container, titleX ,titleY,  categories, seriries) {
 // HEARTRATE MINMAX AVE
 
 
-function createRangeChart (container,  ranges, avarages, title,  unitY, measurement) {
+function createRangeChart(container, ranges, avarages, title, unitY, measurement) {
 
 
-  /*  var ranges = [
-            [1246406400000, 14.3, 27.7],
-            [1246492800000, 14.5, 27.8],
-            [1246579200000, 15.5, 29.6],
-            [1246665600000, 16.7, 30.7],
+    /*  var ranges = [
+              [1246406400000, 14.3, 27.7],
+              [1246492800000, 14.5, 27.8],
+              [1246579200000, 15.5, 29.6],
+              [1246665600000, 16.7, 30.7],
 
-        ],
-        averages = [
-            [1246406400000, 21.5],
-            [1246492800000, 22.1],
-            [1246579200000, 23],
-            [1246665600000, 23.8],
-        ];
-*/
+          ],
+          averages = [
+              [1246406400000, 21.5],
+              [1246492800000, 22.1],
+              [1246579200000, 23],
+              [1246665600000, 23.8],
+          ];
+  */
 
     Highcharts.chart(container, {
 
@@ -321,7 +317,7 @@ function createRangeChart (container,  ranges, avarages, title,  unitY, measurem
         tooltip: {
             crosshairs: true,
             shared: true,
-            valueSuffix:  unitY// '°C'
+            valueSuffix: unitY// '°C'
         },
 
         legend: {},
@@ -351,32 +347,32 @@ function createRangeChart (container,  ranges, avarages, title,  unitY, measurem
     });
 
 }
+
 //---------------------------------------------ColumnChart---------------------------------------------------------------
-function createColumnChart(container,title, yAxisText,categories, seriries ) {
+function createColumnChart(container, title, yAxisText, categories, seriries) {
 
-        var chart = Highcharts.chart(container, {
-            chart: {
-                type: 'column'
-            },
+    var chart = Highcharts.chart(container, {
+        chart: {
+            type: 'column'
+        },
+        title: {
+            text: title //'Stacked column chart'
+        },
+        yAxis: {
             title: {
-                text: title //'Stacked column chart'
-            },
-            yAxis:{
-                title: {
-                    text:  yAxisText //'Total fruit consumption'
-                }
-            },
-            xAxis: {
-                categories: categories
-            },
-            plotOptions: {
-                series: {
-                    allowPointSelect: true
-                }
-            },
-            series:seriries
-        });
-
+                text: yAxisText //'Total fruit consumption'
+            }
+        },
+        xAxis: {
+            categories: categories
+        },
+        plotOptions: {
+            series: {
+                allowPointSelect: true
+            }
+        },
+        series: seriries
+    });
 
 
 }
