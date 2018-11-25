@@ -38,8 +38,7 @@ public class VisualizationController {
             return date;
         }).collect(Collectors.toList());
         List<Integer> sleepMinutes = atomicService.findByName("sleepTime").stream().map(data -> {
-            Date date = new Date(1546297200000L);
-            if (data.getStartTime().getTime() != 0L && data.getStartTime().compareTo(date) < 0) {
+            if (data.getStartTime().getTime() != 0L) {
                 long diff = data.getEndTime().getTime() - data.getStartTime().getTime();
                 long diffMinutes = TimeUnit.MILLISECONDS.toMinutes(diff);
                 return (int) diffMinutes;
